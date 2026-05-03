@@ -1,0 +1,190 @@
+[
+  {
+    "filename": "sample_candidate_1.pdf",
+    "structured_extraction": {
+      "personal_information": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+1-555-0100",
+        "location": "San Francisco, CA"
+      },
+      "education": [
+        {
+          "degree": "Bachelor of Science",
+          "field": "Computer Science",
+          "institution": "Stanford University",
+          "graduation_year": 2018,
+          "gpa": 3.8
+        },
+        {
+          "degree": "Master of Science",
+          "field": "Artificial Intelligence",
+          "institution": "MIT",
+          "graduation_year": 2020,
+          "gpa": 3.9
+        }
+      ],
+      "professional_experience": [
+        {
+          "job_title": "Senior Software Engineer",
+          "company": "Google",
+          "duration_years": 3,
+          "key_responsibilities": ["ML model development", "System design", "Team leadership"]
+        },
+        {
+          "job_title": "Software Engineer",
+          "company": "Facebook",
+          "duration_years": 2,
+          "key_responsibilities": ["Backend development", "Database optimization"]
+        }
+      ],
+      "skills": [
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "Java",
+        "Kubernetes",
+        "Docker",
+        "AWS",
+        "Machine Learning",
+        "Deep Learning",
+        "Natural Language Processing"
+      ],
+      "research_outputs": [
+        {
+          "type": "Conference Paper",
+          "title": "Efficient Transformers for Real-time Processing",
+          "venue": "NeurIPS 2021",
+          "co_authors": 3
+        }
+      ],
+      "certifications": [
+        "AWS Certified Solutions Architect",
+        "Google Cloud Professional Data Engineer"
+      ],
+      "missing_information": ["publications_count", "github_profile"]
+    }
+  },
+  {
+    "filename": "sample_candidate_2.pdf",
+    "structured_extraction": {
+      "personal_information": {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "phone": "+1-555-0101",
+        "location": "New York, NY"
+      },
+      "education": [
+        {
+          "degree": "Bachelor of Science",
+          "field": "Information Technology",
+          "institution": "NYU",
+          "graduation_year": 2019,
+          "gpa": 3.6
+        }
+      ],
+      "professional_experience": [
+        {
+          "job_title": "Data Scientist",
+          "company": "LinkedIn",
+          "duration_years": 2,
+          "key_responsibilities": ["Data analysis", "ML pipeline development"]
+        },
+        {
+          "job_title": "Junior Data Analyst",
+          "company": "Deloitte",
+          "duration_years": 1,
+          "key_responsibilities": ["Business intelligence", "Report generation"]
+        }
+      ],
+      "skills": [
+        "Python",
+        "SQL",
+        "Tableau",
+        "Excel",
+        "Statistics",
+        "Apache Spark",
+        "Pandas",
+        "Data Visualization"
+      ],
+      "research_outputs": [],
+      "certifications": [
+        "Google Analytics Certification"
+      ],
+      "missing_information": ["advanced_degree", "publications", "github_profile", "patents"]
+    }
+  },
+  {
+    "filename": "sample_candidate_3.pdf",
+    "structured_extraction": {
+      "personal_information": {
+        "name": "Dr. Robert Johnson",
+        "email": "robert.johnson@example.com",
+        "phone": "+1-555-0102",
+        "location": "Boston, MA"
+      },
+      "education": [
+        {
+          "degree": "Bachelor of Science",
+          "field": "Physics",
+          "institution": "Harvard University",
+          "graduation_year": 2010,
+          "gpa": 3.9
+        },
+        {
+          "degree": "PhD",
+          "field": "Machine Learning",
+          "institution": "Stanford University",
+          "graduation_year": 2016,
+          "gpa": 3.95
+        }
+      ],
+      "professional_experience": [
+        {
+          "job_title": "Lead Researcher",
+          "company": "OpenAI",
+          "duration_years": 4,
+          "key_responsibilities": ["Research direction", "Paper authoring", "Team management"]
+        },
+        {
+          "job_title": "Postdoctoral Researcher",
+          "company": "Stanford University",
+          "duration_years": 2,
+          "key_responsibilities": ["Academic research", "Grant writing"]
+        }
+      ],
+      "skills": [
+        "Machine Learning",
+        "Deep Learning",
+        "Research Methodology",
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "Statistics",
+        "Academic Writing"
+      ],
+      "research_outputs": [
+        {
+          "type": "Journal Article",
+          "title": "Advances in Neural Network Architecture Search",
+          "venue": "Nature Machine Intelligence",
+          "co_authors": 5
+        },
+        {
+          "type": "Conference Paper",
+          "title": "Efficient Learning in High Dimensional Spaces",
+          "venue": "ICML 2021",
+          "co_authors": 3
+        },
+        {
+          "type": "Conference Paper",
+          "title": "Optimization Techniques for Deep Networks",
+          "venue": "NeurIPS 2020",
+          "co_authors": 4
+        }
+      ],
+      "certifications": [],
+      "missing_information": []
+    }
+  }
+]
