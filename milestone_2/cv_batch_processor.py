@@ -552,12 +552,27 @@ def _extract_with_gemini(raw_text, fallback_name):
 
 def _extract_candidate_name(text, fallback_name):
     """Heuristic candidate-name extractor when LLM extraction is unavailable."""
-    for line in (text or '').splitlines()[:25]:
+    lines = (text or '').splitlines()[:50]  # Look in first 50 lines
+    
+    # First, try to find lines starting with "Name" or similar
+    for line in lines:
+        cleaned = re.sub(r'\s+', ' ', line).strip(' -:\t')
+        lower = cleaned.lower()
+        if lower.startswith('name') and ':' in lower:
+            # Extract after "Name:"
+            parts = cleaned.split(':', 1)
+            if len(parts) > 1:
+                name_part = parts[1].strip()
+                if name_part and len(name_part) > 3:
+                    return ' '.join(word.capitalize() for word in name_part.split())
+    
+    # Fallback to original logic
+    for line in lines:
         cleaned = re.sub(r'\s+', ' ', line).strip(' -:\t')
         if len(cleaned) < 3 or len(cleaned) > 80:
             continue
         lower = cleaned.lower()
-        if any(token in lower for token in ['email', 'phone', 'mobile', 'address', 'objective', 'summary']):
+        if any(token in lower for token in ['email', 'phone', 'mobile', 'address', 'objective', 'summary', 'qualification']):
             continue
         if re.search(r'[^A-Za-z\s\.-]', cleaned):
             continue
@@ -753,24 +768,84 @@ def _extract_education_rule_based(text):
 
 def _extract_experience_rule_based(text):
     records = []
-    year_span = re.compile(r'(19\d{2}|20\d{2}).{0,12}(19\d{2}|20\d{2}|present)', re.IGNORECASE)
-    for line in _extract_section_lines(text, 'experience'):
+    year_span = re.compile(r'(19\d{2}|20\d{2}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec).{0,20}(19\d{2}|20\d{2}|present|current)', re.IGNORECASE)
+    section_lines = _extract_section_lines(text, 'experience')
+    
+    for line in section_lines:
         if len(line) < 4:
             continue
+        parts = [p.strip() for p in line.split(',') if p.strip()]
+        if len(parts) < 2:
+            continue
+        job_title = parts[0]
+        organization = parts[1] if len(parts) > 1 else ''
+        location = parts[2] if len(parts) > 2 else ''
+        duration = parts[3] if len(parts) > 3 else ''
+        
         match = year_span.search(line)
-        start_date = match.group(1) if match else ''
-        end_date = match.group(2).title() if match else ''
+        start_date = ''
+        end_date = ''
+        if match:
+            start_date = match.group(1)
+            end_date = match.group(2)
+        
         records.append({
-            'job_title': line.split(',')[0][:120],
-            'organization': '',
-            'location': '',
+            'job_title': job_title[:120],
+            'organization': organization[:120],
+            'location': location[:120],
             'start_date': start_date,
             'end_date': end_date,
-            'is_current': end_date.lower() == 'present',
+            'is_current': end_date.lower() in ['present', 'current'],
             'job_description': line[:300],
             'industry': '',
             'duration_months': None,
         })
+    return records
+
+
+def _extract_personal_info_rule_based(text):
+    info = {}
+    lines = text.splitlines()[:100]
+    for line in lines:
+        line = line.strip()
+        lower = line.lower()
+        if 'father' in lower and 'name' in lower:
+            parts = line.split(':', 1)
+            if len(parts) > 1:
+                info['fathers_name'] = parts[1].strip()
+        elif 'date' in lower and 'birth' in lower:
+            parts = line.split(':', 1)
+            if len(parts) > 1:
+                info['dob'] = parts[1].strip()
+        elif 'marital' in lower and 'status' in lower:
+            parts = line.split(':', 1)
+            if len(parts) > 1:
+                info['marital_status'] = parts[1].strip()
+    return info
+
+
+def _extract_research_rule_based(text):
+    records = []
+    # Look for publication-like lines
+    lines = text.splitlines()
+    for line in lines:
+        line = line.strip()
+        if len(line) < 10:
+            continue
+        lower = line.lower()
+        if any(keyword in lower for keyword in ['journal', 'conference', 'paper', 'publication', 'published']):
+            # Assume it's a publication
+            records.append({
+                'title': line[:200],
+                'authors': '',
+                'publication_name': '',
+                'publication_year': None,
+                'output_type': 'Journal' if 'journal' in lower else 'Conference',
+                'doi': '',
+                'impact_factor': None,
+                'citations': None,
+                'co_authors': [],
+            })
     return records
 
 
@@ -788,15 +863,18 @@ def parse_cv_text_to_structured(raw_text, fallback_name):
     parsed_name = _extract_candidate_name(text, fallback_name)
     parsed_education = _extract_education_rule_based(text)
     parsed_experience = _extract_experience_rule_based(text)
+    parsed_research = _extract_research_rule_based(text)
+    parsed_personal = _extract_personal_info_rule_based(text)
 
     return {
+        'personal_info': parsed_personal,
         'name': parsed_name,
         'email': email_match.group(0) if email_match else '',
         'phone_number': phone_match.group(0).strip() if phone_match else '',
         'skills': found_skills,
         'education': parsed_education,
         'experience': parsed_experience,
-        'research_outputs': [],
+        'research_outputs': parsed_research,
         'certifications': [],
         'awards': [],
         'references': [],

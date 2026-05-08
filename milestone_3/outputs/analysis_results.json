@@ -1,0 +1,1063 @@
+{
+  "44": {
+    "education_analysis": {
+      "educational_gaps": [
+        "No significant educational gaps detected."
+      ],
+      "institutional_quality": "0 out of 1 degrees are from ranked institutions.",
+      "highest_qualification": "Bachelor of Science in Data Science",
+      "grade_coverage": "0.0%",
+      "records": [
+        {
+          "degree_name": "Bachelor of Science in Data Science",
+          "specialization": "Data Science",
+          "institution_name": "National University Of Sciences & Technology (Nust-Seecs)",
+          "grade_value": null,
+          "grade_metric": "Unknown",
+          "passing_year": 2027,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        }
+      ]
+    },
+    "experience_analysis": {
+      "timeline_overlaps": [
+        "No job overlaps detected."
+      ],
+      "professional_gaps": [
+        "No significant professional gaps detected."
+      ],
+      "career_progression": "Single role history available.",
+      "employment_history_count": 1,
+      "estimated_years": 0.0,
+      "records": [
+        {
+          "job_title": "Data Science Intern",
+          "organization": "Excelerate",
+          "location": "Remote",
+          "start_date": "",
+          "end_date": "2024",
+          "is_current": false,
+          "job_description": "Conducted large-scale Exploratory Data Analysis (EDA) to identify anomalies and improve data quality for downstream modeling. Collaborated with the engineering team to validate model performance.",
+          "industry": "",
+          "duration_months": null
+        }
+      ]
+    },
+    "skill_alignment": {
+      "claimed_skills": 7,
+      "required_skills": [
+        "machine learning",
+        "artificial intelligence",
+        "signal processing",
+        "research",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "matched_required_skills": [
+        "machine learning",
+        "research",
+        "python",
+        "data analysis"
+      ],
+      "missing_required_skills": [
+        "artificial intelligence",
+        "signal processing",
+        "teaching",
+        "communication"
+      ],
+      "aligned_skills_count": 0,
+      "aligned_skills_list": [],
+      "alignment_ratio": "50.0%"
+    },
+    "research_profile": {
+      "status": "Full research profile processed.",
+      "output_count": 3,
+      "journal_count": 0,
+      "conference_count": 0,
+      "recent_publication_year": 2026,
+      "average_impact_factor": 0.0,
+      "topic_variability": {
+        "distinct_topics": 18,
+        "top_topics": [
+          [
+            "generative ai",
+            1
+          ],
+          [
+            "multi-agent systems",
+            1
+          ],
+          [
+            "autonomous",
+            1
+          ],
+          [
+            "academic",
+            1
+          ],
+          [
+            "research",
+            1
+          ],
+          [
+            "agent",
+            1
+          ],
+          [
+            "deep learning",
+            1
+          ],
+          [
+            "computer vision",
+            1
+          ]
+        ],
+        "diversity_index": 6.0
+      },
+      "coauthor_analysis": {
+        "unique_coauthors": 1,
+        "frequent_coauthors": [
+          [
+            "Rimsha Mahmood",
+            3
+          ]
+        ],
+        "average_authors_per_output": 1.0
+      },
+      "sample_titles": [
+        "Autonomous Academic Research Agent",
+        "Automated Equine Pain Recognition",
+        "Global Terrorism Intelligence Platform"
+      ]
+    },
+    "supervision_patents_books": {
+      "supervision_count": 0,
+      "completed_supervision": 0,
+      "ongoing_supervision": 0,
+      "patent_count": 0,
+      "book_count": 0,
+      "records": {
+        "supervision": [],
+        "patents": [],
+        "books": []
+      }
+    },
+    "missing_information": {
+      "status": "Missing information detected.",
+      "missing_fields": [
+        "Grade/CGPA for one or more degrees",
+        "DOI for one or more research outputs"
+      ],
+      "draft_email": "Dear Rimsha Mahmood,\n\nThank you for your interest in the faculty recruitment process. During TALASH profile review, we noticed that the following information is missing or incomplete:\n\n- Grade/CGPA for one or more degrees\n- DOI for one or more research outputs\n\nPlease reply to this email with the missing details or upload an updated CV.\n\nBest regards,\nTALASH Recruitment Team"
+    },
+    "candidate_summary": {
+      "quick_summary": "Rimsha Mahmood has Bachelor of Science in Data Science as the highest qualification, 0.0 estimated years of experience, 0 journal outputs, 0 conference outputs, and 2 missing-information flags.",
+      "education_entries": 1,
+      "experience_entries": 1,
+      "skills_entries": 7,
+      "research_entries": 3,
+      "missing_items": 2
+    },
+    "ranking_analysis": {
+      "overall_score": 30.98,
+      "band": "Needs More Evidence",
+      "breakdown": {
+        "education": {
+          "score": 10,
+          "weight": 20,
+          "reasons": [
+            "Highest degree rank 3"
+          ]
+        },
+        "research": {
+          "score": 2.4,
+          "weight": 25,
+          "reasons": [
+            "0 journals",
+            "0 conferences",
+            "3 recent outputs"
+          ]
+        },
+        "topic_and_collaboration": {
+          "score": 5.18,
+          "weight": 10,
+          "reasons": [
+            "18 distinct topic signals",
+            "1 unique co-authors"
+          ]
+        },
+        "supervision_books_patents": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0 supervision records",
+            "0 patents",
+            "0 books"
+          ]
+        },
+        "experience": {
+          "score": 0.0,
+          "weight": 15,
+          "reasons": [
+            "0.0 estimated years",
+            "0 academic/research roles"
+          ]
+        },
+        "skill_alignment": {
+          "score": 6.4,
+          "weight": 10,
+          "reasons": [
+            "50.0% evidence alignment"
+          ]
+        },
+        "completeness": {
+          "score": 7.0,
+          "weight": 10,
+          "reasons": [
+            "2 missing-information flags"
+          ]
+        }
+      },
+      "model": "TALASH weighted academic hiring score v3"
+    }
+  },
+  "45": {
+    "education_analysis": {
+      "status": "No education data found.",
+      "educational_gaps": [
+        "Education records are missing."
+      ],
+      "institutional_quality": "0 out of 0 degrees are from ranked institutions.",
+      "highest_qualification": "N/A",
+      "grade_coverage": "0%"
+    },
+    "experience_analysis": {
+      "status": "No professional experience data found.",
+      "timeline_overlaps": [
+        "No experience timeline available."
+      ],
+      "professional_gaps": [
+        "No experience timeline available."
+      ],
+      "career_progression": "No clear progression pattern identified.",
+      "employment_history_count": 0,
+      "estimated_years": 0
+    },
+    "skill_alignment": {
+      "claimed_skills": 0,
+      "required_skills": [
+        "machine learning",
+        "artificial intelligence",
+        "signal processing",
+        "research",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "matched_required_skills": [],
+      "missing_required_skills": [
+        "machine learning",
+        "artificial intelligence",
+        "signal processing",
+        "research",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "aligned_skills_count": 0,
+      "aligned_skills_list": [],
+      "alignment_ratio": "0.0%"
+    },
+    "research_profile": {
+      "status": "No research outputs available.",
+      "output_count": 0,
+      "journal_count": 0,
+      "conference_count": 0,
+      "recent_publication_year": null,
+      "average_impact_factor": 0,
+      "topic_variability": {
+        "distinct_topics": 0,
+        "top_topics": [],
+        "diversity_index": 0.0
+      },
+      "coauthor_analysis": {
+        "unique_coauthors": 0,
+        "frequent_coauthors": [],
+        "average_authors_per_output": 0
+      },
+      "sample_titles": []
+    },
+    "supervision_patents_books": {
+      "supervision_count": 0,
+      "completed_supervision": 0,
+      "ongoing_supervision": 0,
+      "patent_count": 0,
+      "book_count": 0,
+      "records": {
+        "supervision": [],
+        "patents": [],
+        "books": []
+      }
+    },
+    "missing_information": {
+      "status": "Missing information detected.",
+      "missing_fields": [
+        "Candidate email",
+        "Candidate phone number",
+        "Education details",
+        "Professional experience records"
+      ],
+      "draft_email": "Dear 20260508_011557_muhammad_salman_cv,\n\nThank you for your interest in the faculty recruitment process. During TALASH profile review, we noticed that the following information is missing or incomplete:\n\n- Candidate email\n- Candidate phone number\n- Education details\n- Professional experience records\n\nPlease reply to this email with the missing details or upload an updated CV.\n\nBest regards,\nTALASH Recruitment Team"
+    },
+    "candidate_summary": {
+      "quick_summary": "20260508_011557_muhammad_salman_cv has N/A as the highest qualification, 0 estimated years of experience, 0 journal outputs, 0 conference outputs, and 4 missing-information flags.",
+      "education_entries": 0,
+      "experience_entries": 0,
+      "skills_entries": 0,
+      "research_entries": 0,
+      "missing_items": 4
+    },
+    "ranking_analysis": {
+      "overall_score": 4.0,
+      "band": "Needs More Evidence",
+      "breakdown": {
+        "education": {
+          "score": 0,
+          "weight": 20,
+          "reasons": [
+            "No education records found"
+          ]
+        },
+        "research": {
+          "score": 0.0,
+          "weight": 25,
+          "reasons": [
+            "0 journals",
+            "0 conferences",
+            "0 recent outputs"
+          ]
+        },
+        "topic_and_collaboration": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0 distinct topic signals",
+            "0 unique co-authors"
+          ]
+        },
+        "supervision_books_patents": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0 supervision records",
+            "0 patents",
+            "0 books"
+          ]
+        },
+        "experience": {
+          "score": 0.0,
+          "weight": 15,
+          "reasons": [
+            "0.0 estimated years",
+            "0 academic/research roles"
+          ]
+        },
+        "skill_alignment": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0.0% evidence alignment"
+          ]
+        },
+        "completeness": {
+          "score": 4.0,
+          "weight": 10,
+          "reasons": [
+            "4 missing-information flags"
+          ]
+        }
+      },
+      "model": "TALASH weighted academic hiring score v3"
+    }
+  },
+  "30": {
+    "education_analysis": {
+      "educational_gaps": [
+        "4-year gap between HSSC and BE.",
+        "13-year gap between MSc and PhD."
+      ],
+      "institutional_quality": "1 out of 5 degrees are from ranked institutions.",
+      "highest_qualification": "PhD",
+      "grade_coverage": "100.0%",
+      "records": [
+        {
+          "degree_name": "SSC",
+          "specialization": "Science",
+          "institution_name": "Fbise",
+          "grade_value": 85.0,
+          "grade_metric": "Percentage",
+          "passing_year": 2000,
+          "is_sse_hssc": true,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "HSSC",
+          "specialization": "Pre-Engineering",
+          "institution_name": "Fbise",
+          "grade_value": 76.0,
+          "grade_metric": "Percentage",
+          "passing_year": 2002,
+          "is_sse_hssc": true,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "BE",
+          "specialization": "Electrical Engineering",
+          "institution_name": "National University of Sciences and Technology",
+          "grade_value": 2.5,
+          "grade_metric": "GPA",
+          "passing_year": 2006,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "MSc",
+          "specialization": "Microelectronic System and Telecommunication Engineering",
+          "institution_name": "University Of Liverpool",
+          "grade_value": 81.0,
+          "grade_metric": "Percentage",
+          "passing_year": 2008,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "PhD",
+          "specialization": "Information and Communication Engineering",
+          "institution_name": "University Of Science And Technology Of China",
+          "grade_value": 3.68,
+          "grade_metric": "GPA",
+          "passing_year": 2021,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        }
+      ]
+    },
+    "experience_analysis": {
+      "timeline_overlaps": [
+        "No job overlaps detected."
+      ],
+      "professional_gaps": [
+        "Gap of about 11 months before Research Assistant.",
+        "Gap of about 7 months before Lecturer.",
+        "Gap of about 55 months before Visiting Faculty Member."
+      ],
+      "career_progression": "Academic progression from lecturer/research roles toward professor track detected.",
+      "employment_history_count": 7,
+      "estimated_years": 11.9,
+      "records": [
+        {
+          "job_title": "Research Student",
+          "organization": "University of Liverpool",
+          "location": "Liverpool, UK",
+          "start_date": "May-2008",
+          "end_date": "Sep-2008",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 4
+        },
+        {
+          "job_title": "Research Assistant",
+          "organization": "Victoria University of Wellington",
+          "location": "New Zealand",
+          "start_date": "Aug-2009",
+          "end_date": "Jul-2013",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 47
+        },
+        {
+          "job_title": "Lecturer",
+          "organization": "Riphah International University",
+          "location": "Islamabad",
+          "start_date": "Feb-2014",
+          "end_date": "Mar-2016",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 25
+        },
+        {
+          "job_title": "Lecturer",
+          "organization": "University of Lahore",
+          "location": "Islamabad",
+          "start_date": "Apr-2016",
+          "end_date": "Aug-2017",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 16
+        },
+        {
+          "job_title": "Visiting Faculty Member",
+          "organization": "CISCOM",
+          "location": "Rawalpindi",
+          "start_date": "Feb-2022",
+          "end_date": "Mar-2023",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 13
+        },
+        {
+          "job_title": "General Manager / Principal Machine Learning Engineer",
+          "organization": "WUWI Inc",
+          "location": "California / Beijing",
+          "start_date": "Mar-2023",
+          "end_date": "Mar-2024",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": 12
+        },
+        {
+          "job_title": "Assistant Professor",
+          "organization": "Cholistan University of Veterinary and Animal Sciences",
+          "location": "Bahawalpur",
+          "start_date": "Mar-2024",
+          "end_date": "Present",
+          "is_current": true,
+          "job_description": "",
+          "industry": "",
+          "duration_months": null
+        }
+      ]
+    },
+    "skill_alignment": {
+      "claimed_skills": 0,
+      "required_skills": [
+        "machine learning",
+        "artificial intelligence",
+        "signal processing",
+        "research",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "matched_required_skills": [
+        "machine learning",
+        "signal processing",
+        "research"
+      ],
+      "missing_required_skills": [
+        "artificial intelligence",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "aligned_skills_count": 0,
+      "aligned_skills_list": [],
+      "alignment_ratio": "37.5%"
+    },
+    "research_profile": {
+      "status": "Full research profile processed.",
+      "output_count": 9,
+      "journal_count": 6,
+      "conference_count": 3,
+      "recent_publication_year": 2024,
+      "average_impact_factor": 1.86,
+      "topic_variability": {
+        "distinct_topics": 45,
+        "top_topics": [
+          [
+            "separation",
+            6
+          ],
+          [
+            "speech",
+            5
+          ],
+          [
+            "independent",
+            4
+          ],
+          [
+            "component",
+            3
+          ],
+          [
+            "entropy",
+            3
+          ],
+          [
+            "cochlear",
+            2
+          ],
+          [
+            "microphonic",
+            2
+          ],
+          [
+            "geometric",
+            2
+          ]
+        ],
+        "diversity_index": 5.0
+      },
+      "coauthor_analysis": {
+        "unique_coauthors": 18,
+        "frequent_coauthors": [
+          [
+            "Asim Masood",
+            5
+          ],
+          [
+            "A. Masood",
+            4
+          ],
+          [
+            "Zhongfu Ye",
+            4
+          ],
+          [
+            "Md Imran Hossain",
+            2
+          ],
+          [
+            "A K Nandi",
+            1
+          ],
+          [
+            "P. Teal",
+            1
+          ],
+          [
+            "C. Hollitt",
+            1
+          ],
+          [
+            "R. Dykstra",
+            1
+          ]
+        ],
+        "average_authors_per_output": 3.22
+      },
+      "sample_titles": [
+        "Information theory based redundancy and independent component analysis",
+        "Cochlear Microphonic Data Acquisition System",
+        "Independent Component Analysis based speech separation using geometric kth nearest neighbor entropy estimator",
+        "Independent Vector Analysis based Convolutive Speech Separation by Estimating Entropy using Recursive Copula Splitting",
+        "Single Channel Speech Separation using Deep Recurrent Neural Network via Copula Component Analysis"
+      ]
+    },
+    "supervision_patents_books": {
+      "supervision_count": 0,
+      "completed_supervision": 0,
+      "ongoing_supervision": 0,
+      "patent_count": 0,
+      "book_count": 0,
+      "records": {
+        "supervision": [],
+        "patents": [],
+        "books": []
+      }
+    },
+    "missing_information": {
+      "status": "Missing information detected.",
+      "missing_fields": [
+        "Candidate email",
+        "Candidate phone number",
+        "Job description for one or more experience records",
+        "DOI for one or more research outputs"
+      ],
+      "draft_email": "Dear Asim Masood,\n\nThank you for your interest in the faculty recruitment process. During TALASH profile review, we noticed that the following information is missing or incomplete:\n\n- Candidate email\n- Candidate phone number\n- Job description for one or more experience records\n- DOI for one or more research outputs\n\nPlease reply to this email with the missing details or upload an updated CV.\n\nBest regards,\nTALASH Recruitment Team"
+    },
+    "candidate_summary": {
+      "quick_summary": "Asim Masood has PhD as the highest qualification, 11.9 estimated years of experience, 6 journal outputs, 3 conference outputs, and 4 missing-information flags.",
+      "education_entries": 5,
+      "experience_entries": 7,
+      "skills_entries": 0,
+      "research_entries": 9,
+      "missing_items": 4
+    },
+    "ranking_analysis": {
+      "overall_score": 68.37,
+      "band": "Review",
+      "breakdown": {
+        "education": {
+          "score": 20,
+          "weight": 20,
+          "reasons": [
+            "Highest degree rank 5"
+          ]
+        },
+        "research": {
+          "score": 17.38,
+          "weight": 25,
+          "reasons": [
+            "6 journals",
+            "3 conferences",
+            "4 recent outputs"
+          ]
+        },
+        "topic_and_collaboration": {
+          "score": 8.24,
+          "weight": 10,
+          "reasons": [
+            "45 distinct topic signals",
+            "18 unique co-authors"
+          ]
+        },
+        "supervision_books_patents": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0 supervision records",
+            "0 patents",
+            "0 books"
+          ]
+        },
+        "experience": {
+          "score": 15,
+          "weight": 15,
+          "reasons": [
+            "11.9 estimated years",
+            "6 academic/research roles"
+          ]
+        },
+        "skill_alignment": {
+          "score": 3.75,
+          "weight": 10,
+          "reasons": [
+            "37.5% evidence alignment"
+          ]
+        },
+        "completeness": {
+          "score": 4.0,
+          "weight": 10,
+          "reasons": [
+            "4 missing-information flags"
+          ]
+        }
+      },
+      "model": "TALASH weighted academic hiring score v3"
+    }
+  },
+  "37": {
+    "education_analysis": {
+      "educational_gaps": [
+        "4-year gap between ICS and BS.",
+        "5-year gap between MS and PhD."
+      ],
+      "institutional_quality": "0 out of 5 degrees are from ranked institutions.",
+      "highest_qualification": "PhD",
+      "grade_coverage": "100.0%",
+      "records": [
+        {
+          "degree_name": "Matric",
+          "specialization": "Phy, Math, Ch, Bio",
+          "institution_name": "Bise Bahawalpur",
+          "grade_value": 67.0,
+          "grade_metric": "Percentage",
+          "passing_year": 2010,
+          "is_sse_hssc": true,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "ICS",
+          "specialization": "Phy, Math, Computer",
+          "institution_name": "Bise Bahawalpur",
+          "grade_value": 65.0,
+          "grade_metric": "Percentage",
+          "passing_year": 2013,
+          "is_sse_hssc": true,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "BS",
+          "specialization": "Telecommunication Engineering",
+          "institution_name": "The Islamia University Of Engineering Bahawalpur",
+          "grade_value": 3.15,
+          "grade_metric": "GPA",
+          "passing_year": 2017,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "MS",
+          "specialization": "Electronics Engineering",
+          "institution_name": "The Islamia University Of Engineering Bahawalpur",
+          "grade_value": 3.47,
+          "grade_metric": "GPA",
+          "passing_year": 2020,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        },
+        {
+          "degree_name": "PhD",
+          "specialization": "computer Engineering",
+          "institution_name": "Kfueit",
+          "grade_value": 3.34,
+          "grade_metric": "GPA",
+          "passing_year": 2025,
+          "is_sse_hssc": false,
+          "qs_ranking": null,
+          "the_ranking": null
+        }
+      ]
+    },
+    "experience_analysis": {
+      "timeline_overlaps": [
+        "No job overlaps detected."
+      ],
+      "professional_gaps": [
+        "No significant professional gaps detected."
+      ],
+      "career_progression": "Single role history available.",
+      "employment_history_count": 1,
+      "estimated_years": 4.2,
+      "records": [
+        {
+          "job_title": "Visting Lecturer",
+          "organization": "KFUEIT RYK",
+          "location": "RYK",
+          "start_date": "Feb-2021",
+          "end_date": "May-2025",
+          "is_current": false,
+          "job_description": "",
+          "industry": "",
+          "duration_months": null
+        }
+      ]
+    },
+    "skill_alignment": {
+      "claimed_skills": 0,
+      "required_skills": [
+        "machine learning",
+        "artificial intelligence",
+        "signal processing",
+        "research",
+        "python",
+        "data analysis",
+        "teaching",
+        "communication"
+      ],
+      "matched_required_skills": [
+        "machine learning",
+        "research",
+        "communication"
+      ],
+      "missing_required_skills": [
+        "artificial intelligence",
+        "signal processing",
+        "python",
+        "data analysis",
+        "teaching"
+      ],
+      "aligned_skills_count": 0,
+      "aligned_skills_list": [],
+      "alignment_ratio": "37.5%"
+    },
+    "research_profile": {
+      "status": "Full research profile processed.",
+      "output_count": 15,
+      "journal_count": 11,
+      "conference_count": 4,
+      "recent_publication_year": 2025,
+      "average_impact_factor": 1.46,
+      "topic_variability": {
+        "distinct_topics": 87,
+        "top_topics": [
+          [
+            "learning",
+            5
+          ],
+          [
+            "machine",
+            3
+          ],
+          [
+            "techniques",
+            3
+          ],
+          [
+            "detection",
+            3
+          ],
+          [
+            "model",
+            3
+          ],
+          [
+            "real-time",
+            3
+          ],
+          [
+            "smart",
+            3
+          ],
+          [
+            "adulteration",
+            3
+          ]
+        ],
+        "diversity_index": 5.8
+      },
+      "coauthor_analysis": {
+        "unique_coauthors": 34,
+        "frequent_coauthors": [
+          [
+            "Muhammad Aqeel",
+            16
+          ],
+          [
+            "Muhammad Iqbal",
+            6
+          ],
+          [
+            "Muhammad Adeel Azam",
+            5
+          ],
+          [
+            "Ahmed Sohaib",
+            4
+          ],
+          [
+            "Khan Bahadar Khan",
+            4
+          ],
+          [
+            "Hammad Shahab",
+            4
+          ],
+          [
+            "Fawwad Hassan Jaskani",
+            3
+          ],
+          [
+            "Muhammad Sikander Shahbaz",
+            3
+          ]
+        ],
+        "average_authors_per_output": 5.13
+      },
+      "sample_titles": [
+        "Comparative Analysis of Urdu Parts Of Speech Taggers using Machine Learning Techniques",
+        "Facial Emotion Recognition using Deep Learning (FERDL)",
+        "Analysis of the MIDAS and OASIS biomedical databases for the application of multimodal image processing",
+        "Brain tumor localization and segmentation based on Pixel-Based thresholding with morphological operation",
+        "Detection of Anomaly in Videos Using Convolutional Autoencoder and Generative Adversarial Network model"
+      ]
+    },
+    "supervision_patents_books": {
+      "supervision_count": 0,
+      "completed_supervision": 0,
+      "ongoing_supervision": 0,
+      "patent_count": 0,
+      "book_count": 0,
+      "records": {
+        "supervision": [],
+        "patents": [],
+        "books": []
+      }
+    },
+    "missing_information": {
+      "status": "Missing information detected.",
+      "missing_fields": [
+        "Candidate email",
+        "Candidate phone number",
+        "Job description for one or more experience records",
+        "DOI for one or more research outputs"
+      ],
+      "draft_email": "Dear Muhammad Aqeel,\n\nThank you for your interest in the faculty recruitment process. During TALASH profile review, we noticed that the following information is missing or incomplete:\n\n- Candidate email\n- Candidate phone number\n- Job description for one or more experience records\n- DOI for one or more research outputs\n\nPlease reply to this email with the missing details or upload an updated CV.\n\nBest regards,\nTALASH Recruitment Team"
+    },
+    "candidate_summary": {
+      "quick_summary": "Muhammad Aqeel has PhD as the highest qualification, 4.2 estimated years of experience, 11 journal outputs, 4 conference outputs, and 4 missing-information flags.",
+      "education_entries": 5,
+      "experience_entries": 1,
+      "skills_entries": 0,
+      "research_entries": 15,
+      "missing_items": 4
+    },
+    "ranking_analysis": {
+      "overall_score": 64.29,
+      "band": "Review",
+      "breakdown": {
+        "education": {
+          "score": 19,
+          "weight": 20,
+          "reasons": [
+            "Highest degree rank 5"
+          ]
+        },
+        "research": {
+          "score": 21.64,
+          "weight": 25,
+          "reasons": [
+            "11 journals",
+            "4 conferences",
+            "10 recent outputs"
+          ]
+        },
+        "topic_and_collaboration": {
+          "score": 10,
+          "weight": 10,
+          "reasons": [
+            "87 distinct topic signals",
+            "34 unique co-authors"
+          ]
+        },
+        "supervision_books_patents": {
+          "score": 0.0,
+          "weight": 10,
+          "reasons": [
+            "0 supervision records",
+            "0 patents",
+            "0 books"
+          ]
+        },
+        "experience": {
+          "score": 5.9,
+          "weight": 15,
+          "reasons": [
+            "4.2 estimated years",
+            "1 academic/research roles"
+          ]
+        },
+        "skill_alignment": {
+          "score": 3.75,
+          "weight": 10,
+          "reasons": [
+            "37.5% evidence alignment"
+          ]
+        },
+        "completeness": {
+          "score": 4.0,
+          "weight": 10,
+          "reasons": [
+            "4 missing-information flags"
+          ]
+        }
+      },
+      "model": "TALASH weighted academic hiring score v3"
+    }
+  }
+}
