@@ -1,51 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Box, CircularProgress } from '@mui/material';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import Candidates from './components/Candidates';
-import CandidateDetail from './components/CandidateDetail';
-import Reports from './components/Reports';
-import Settings from './components/Settings';
-import Layout from './components/Layout';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext";
+import Layout from "./components/Layout";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import Candidates from "./components/Candidates";
+import CandidateDetail from "./components/CandidateDetail";
+import Analysis from "./components/Analysis";
+import Reports from "./components/Reports";
+import Settings from "./components/Settings";
 
-function AppContent() {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-        <CircularProgress />
-      </Box>
-    );
+function RequireAuth({ children }) {
+  const { auth } = useAuth();
+  if (auth.loading) {
+    return <div className="boot-screen">Loading TALASH...</div>;
   }
-
-  if (!user) {
-    return <Login />;
+  if (!auth.authenticated) {
+    return <Navigate to="/login" replace />;
   }
-
-  return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/candidates" element={<Candidates />} />
-        <Route path="/candidates/:id" element={<CandidateDetail />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
-      </Routes>
-    </Layout>
-  );
+  return children;
 }
 
-function App() {
+export default function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <RequireAuth>
+            <Layout />
+          </RequireAuth>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="candidates" element={<Candidates />} />
+        <Route path="candidates/:candidateId" element={<CandidateDetail />} />
+        <Route path="analysis" element={<Analysis />} />
+        <Route path="analysis/:candidateId" element={<Analysis />} />
+        <Route path="profile/:candidateId" element={<CandidateDetail />} />
+        <Route path="reports" element={<Reports />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+    </Routes>
   );
 }
-
-export default App;

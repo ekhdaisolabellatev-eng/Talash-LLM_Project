@@ -1,7 +1,8 @@
-Flask==2.3.3
-Flask-CORS==4.0.0
-pdfplumber==0.10.3
-python-dotenv==1.0.0
-requests==2.31.0
-Werkzeug==2.3.7
-gunicorn==21.2.0
+Flask>=2.3.0
+flask-cors>=4.0.0
+pdfplumber>=0.11.0
+pypdf>=4.0.0
+google-generativeai>=0.5.0
+python-dotenv>=1.0.0
+python-dateutil>=2.8.2
+requests>=2.31.0

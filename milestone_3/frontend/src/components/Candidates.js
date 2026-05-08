@@ -1,223 +1,116 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Paper,
-  Typography,
-  Chip,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  LinearProgress
-} from '@mui/material';
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarFilterButton,
-  GridToolbarExport
-} from '@mui/x-data-grid';
-import {
-  Upload as UploadIcon,
-  Email as EmailIcon,
-  Assessment as AssessmentIcon
-} from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { apiGet, apiDelete } from "../api";
+import { useAuth } from "../contexts/AuthContext";
 
-function Candidates() {
-  const [candidates, setCandidates] = useState([]);
+export default function Candidates() {
+  const { auth = {} } = useAuth();
+  const [rows, setRows] = useState([]);
+  const [query, setQuery] = useState("");
+  const [band, setBand] = useState("all");
   const [loading, setLoading] = useState(true);
-  const [uploadDialog, setUploadDialog] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCandidates();
-  }, []);
+    if (auth.loading) return;
 
-  const fetchCandidates = async () => {
+    setLoading(true);
+    apiGet("/api/candidates")
+      .then((payload) => {
+        const allRows = payload.candidates || [];
+        const visibleRows = auth.role === "admin"
+          ? allRows
+          : allRows.filter((row) => row.uploaded_by === auth.user);
+        setRows(visibleRows);
+      })
+      .catch((err) => {
+        alert(`Could not load candidates: ${err.message}`);
+      })
+      .finally(() => setLoading(false));
+  }, [auth.role, auth.user, auth.loading]);
+
+  const filtered = useMemo(() => {
+    return rows.filter((row) => {
+      const matchesQuery = `${row.name} ${row.email}`.toLowerCase().includes(query.toLowerCase());
+      const matchesBand = band === "all" || row.ranking_band === band;
+      return matchesQuery && matchesBand;
+    });
+  }, [rows, query, band]);
+
+  const bands = ["all", ...Array.from(new Set(rows.map((row) => row.ranking_band)))];
+
+  async function handleDelete(candidateId) {
+    if (!confirm("Are you sure you want to delete this candidate?")) return;
     try {
-      const response = await axios.get('/api/candidates');
-      setCandidates(response.data.candidates);
-    } catch (error) {
-      console.error('Error fetching candidates:', error);
-    } finally {
-      setLoading(false);
+      await apiDelete(`/api/candidate/${candidateId}`);
+      setRows(rows.filter(row => row.id !== candidateId));
+    } catch (err) {
+      alert(`Failed to delete candidate: ${err.message}`);
     }
-  };
+  }
 
-  const handleFileUpload = async () => {
-    if (!selectedFile) return;
-
-    setUploading(true);
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-
-    try {
-      await axios.post('/api/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      setUploadDialog(false);
-      setSelectedFile(null);
-      fetchCandidates(); // Refresh the list
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    } finally {
-      setUploading(false);
-    }
-  };
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'COMPLETE': return 'success';
-      case 'REVIEW': return 'warning';
-      default: return 'default';
-    }
-  };
-
-  const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'name', headerName: 'Name', width: 200 },
-    { field: 'email', headerName: 'Email', width: 250 },
-    {
-      field: 'status',
-      headerName: 'Status',
-      width: 120,
-      renderCell: (params) => (
-        <Chip
-          label={params.value}
-          color={getStatusColor(params.value)}
-          size="small"
-        />
-      ),
-    },
-    { field: 'experience_count', headerName: 'Experience', width: 100, align: 'center' },
-    { field: 'skills_count', headerName: 'Skills', width: 80, align: 'center' },
-    {
-      field: 'score',
-      headerName: 'Score',
-      width: 100,
-      align: 'center',
-      renderCell: (params) => (
-        <Chip
-          label={params.row.score_display}
-          color={params.value >= 80 ? 'success' : params.value >= 60 ? 'warning' : 'error'}
-          size="small"
-        />
-      ),
-    },
-    {
-      field: 'ranking_score',
-      headerName: 'Ranking',
-      width: 100,
-      align: 'center',
-      renderCell: (params) => (
-        <Chip
-          label={params.row.ranking_display}
-          color={params.value >= 80 ? 'success' : params.value >= 60 ? 'warning' : 'error'}
-          size="small"
-          variant="outlined"
-        />
-      ),
-    },
-    {
-      field: 'actions',
-      headerName: 'Actions',
-      width: 200,
-      renderCell: (params) => (
-        <Box>
-          <Button
-            size="small"
-            onClick={() => navigate(`/candidates/${params.row.id}`)}
-            sx={{ mr: 1 }}
-          >
-            <AssessmentIcon fontSize="small" />
-          </Button>
-          <Button
-            size="small"
-            color="secondary"
-            onClick={() => handleSendEmail(params.row.id)}
-          >
-            <EmailIcon fontSize="small" />
-          </Button>
-        </Box>
-      ),
-    },
-  ];
-
-  const handleSendEmail = async (candidateId) => {
-    // This would open an email dialog - simplified for now
-    console.log('Send email to candidate:', candidateId);
-  };
-
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <Button
-          startIcon={<UploadIcon />}
-          onClick={() => setUploadDialog(true)}
-          sx={{ mr: 2 }}
-        >
-          Upload CV
-        </Button>
-        <GridToolbarFilterButton />
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
+  if (auth.loading || loading) {
+    return <div className="boot-screen">Querying Database...</div>;
   }
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom>
-        Candidates
-      </Typography>
+    <div className="page-stack">
+      <header className="page-header">
+        <div>
+          <p className="eyebrow">Candidate-wise tabular output</p>
+          <h2>Candidate Ledger</h2>
+        </div>
+        <div className="toolbar">
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search candidates" />
+          <select value={band} onChange={(event) => setBand(event.target.value)}>
+            {bands.map((item) => <option key={item} value={item}>{item === "all" ? "All bands" : item}</option>)}
+          </select>
+        </div>
+      </header>
 
-      <Paper sx={{ height: 600, width: '100%' }}>
-        <DataGrid
-          rows={candidates}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10, 25, 50]}
-          loading={loading}
-          components={{
-            Toolbar: CustomToolbar,
-          }}
-          sortModel={[{ field: 'ranking_score', sort: 'desc' }]}
-          onRowClick={(params) => navigate(`/candidates/${params.row.id}`)}
-        />
-      </Paper>
-
-      {/* Upload Dialog */}
-      <Dialog open={uploadDialog} onClose={() => setUploadDialog(false)}>
-        <DialogTitle>Upload CV</DialogTitle>
-        <DialogContent>
-          <TextField
-            type="file"
-            inputProps={{ accept: '.pdf' }}
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-            fullWidth
-            sx={{ mt: 2 }}
-          />
-          {uploading && <LinearProgress sx={{ mt: 2 }} />}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setUploadDialog(false)}>Cancel</Button>
-          <Button
-            onClick={handleFileUpload}
-            disabled={!selectedFile || uploading}
-            variant="contained"
-          >
-            {uploading ? 'Uploading...' : 'Upload'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+      <section className="panel">
+        {filtered.length === 0 && (
+          <div className="empty-state">
+            <h3>No candidates yet</h3>
+            <p>Upload a CV from the dashboard or run folder ingestion to populate this user's ledger.</p>
+          </div>
+        )}
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Education</th>
+              <th>Experience</th>
+              <th>Research</th>
+              <th>Missing</th>
+              <th>Ranking</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((candidate) => (
+              <tr key={candidate.id} className="clickable-row">
+                <td>
+                  <Link to={`/candidates/${candidate.id}`}>{candidate.name}</Link>
+                  <small>{candidate.email || "Email missing"}</small>
+                </td>
+                <td>{candidate.education_count}</td>
+                <td>{candidate.experience_count}</td>
+                <td>{candidate.research_count}</td>
+                <td>{candidate.missing_count}</td>
+                <td>
+                  <span className="score-pill">{candidate.ranking_score}</span>
+                  <small>{candidate.ranking_band}</small>
+                </td>
+                <td className="action-cell">
+                  <Link className="table-button" to={`/profile/${candidate.id}`}>Profile</Link>
+                  <Link className="table-button" to={`/analysis/${candidate.id}`}>Analysis</Link>
+                  <button className="table-button delete" onClick={() => handleDelete(candidate.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </div>
   );
 }
-
-export default Candidates;

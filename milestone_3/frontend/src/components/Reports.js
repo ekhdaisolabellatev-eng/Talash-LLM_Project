@@ -1,297 +1,136 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Chip,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions
-} from '@mui/material';
-import {
-  Download as DownloadIcon,
-  Email as EmailIcon
-} from '@mui/icons-material';
-import { DataGrid } from '@mui/x-data-grid';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { apiGet, apiPost } from "../api";
 
-function Reports() {
-  const [tabularData, setTabularData] = useState([]);
-  const [emailTracking, setEmailTracking] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [emailDialog, setEmailDialog] = useState(false);
-
-  useEffect(() => {
-    fetchReportsData();
-  }, []);
-
-  const fetchReportsData = async () => {
-    try {
-      const [tabularRes, emailRes] = await Promise.all([
-        axios.get('/api/tabular-output'),
-        axios.get('/api/email-tracking')
-      ]);
-      setTabularData(tabularRes.data.rows);
-      setEmailTracking(emailRes.data.tracking_data);
-    } catch (error) {
-      console.error('Error fetching reports data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const exportToCSV = (data, filename) => {
-    const headers = Object.keys(data[0] || {});
-    const csvContent = [
-      headers.join(','),
-      ...data.map(row => headers.map(header => `"${row[header] || ''}"`).join(','))
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
-
-  const tabularColumns = [
-    { field: 'candidate_id', headerName: 'ID', width: 70 },
-    { field: 'candidate_name', headerName: 'Name', width: 200 },
-    { field: 'highest_qualification', headerName: 'Qualification', width: 150 },
-    { field: 'experience_roles', headerName: 'Experience', width: 100, align: 'center' },
-    { field: 'skill_alignment_ratio', headerName: 'Skill Alignment', width: 120, align: 'center' },
-    { field: 'ranking_score', headerName: 'Ranking Score', width: 120, align: 'center' },
-    { field: 'missing_fields', headerName: 'Missing Fields', width: 120, align: 'center' },
-  ];
-
-  const emailColumns = [
-    { field: 'candidate_name', headerName: 'Candidate', width: 150 },
-    { field: 'email', headerName: 'Email', width: 250 },
-    { field: 'subject', headerName: 'Subject', width: 200 },
-    { field: 'sent_at', headerName: 'Sent At', width: 150 },
-    {
-      field: 'opened',
-      headerName: 'Opened',
-      width: 100,
-      align: 'center',
-      renderCell: (params) => (
-        <Chip
-          label={params.value ? 'Yes' : 'No'}
-          color={params.value ? 'success' : 'default'}
-          size="small"
-        />
-      ),
-    },
-    { field: 'opened_at', headerName: 'Opened At', width: 150 },
-  ];
-
+function Bars({ title, labels = [], values = [] }) {
+  const max = Math.max(1, ...values);
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom>
-        Reports & Analytics
-      </Typography>
-
-      <Grid container spacing={3}>
-        {/* Tabular Output */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2 }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-              <Typography variant="h6">
-                Candidate Analysis Report
-              </Typography>
-              <Button
-                startIcon={<DownloadIcon />}
-                onClick={() => exportToCSV(tabularData, 'candidate_analysis_report.csv')}
-                variant="outlined"
-              >
-                Export CSV
-              </Button>
-            </Box>
-            <Box sx={{ height: 400 }}>
-              <DataGrid
-                rows={tabularData}
-                columns={tabularColumns}
-                pageSize={10}
-                rowsPerPageOptions={[10, 25, 50]}
-                loading={loading}
-                sortModel={[{ field: 'ranking_score', sort: 'desc' }]}
-                getRowId={(row) => row.candidate_id}
-              />
-            </Box>
-          </Paper>
-        </Grid>
-
-        {/* Email Tracking */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2 }}>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-              <Typography variant="h6">
-                Email Tracking Report
-              </Typography>
-              <Button
-                startIcon={<EmailIcon />}
-                onClick={() => setEmailDialog(true)}
-                variant="outlined"
-              >
-                View Details
-              </Button>
-            </Box>
-            <Box sx={{ height: 300 }}>
-              <DataGrid
-                rows={emailTracking}
-                columns={emailColumns}
-                pageSize={5}
-                rowsPerPageOptions={[5, 10]}
-                loading={loading}
-                getRowId={(row) => row.tracking_id}
-              />
-            </Box>
-          </Paper>
-        </Grid>
-
-        {/* Summary Stats */}
-        <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
-              Report Summary
-            </Typography>
-            <TableContainer>
-              <Table size="small">
-                <TableBody>
-                  <TableRow>
-                    <TableCell>Total Candidates</TableCell>
-                    <TableCell align="right">{tabularData.length}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Average Ranking Score</TableCell>
-                    <TableCell align="right">
-                      {tabularData.length > 0
-                        ? (tabularData.reduce((sum, row) => sum + (row.ranking_score || 0), 0) / tabularData.length).toFixed(1)
-                        : '0.0'
-                      }
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Emails Sent</TableCell>
-                    <TableCell align="right">{emailTracking.length}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Emails Opened</TableCell>
-                    <TableCell align="right">
-                      {emailTracking.filter(email => email.opened).length}
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Open Rate</TableCell>
-                    <TableCell align="right">
-                      {emailTracking.length > 0
-                        ? ((emailTracking.filter(email => email.opened).length / emailTracking.length) * 100).toFixed(1) + '%'
-                        : '0%'
-                      }
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </Grid>
-
-        {/* Top Performers */}
-        <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
-              Top 5 Candidates by Ranking Score
-            </Typography>
-            <TableContainer>
-              <Table size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Rank</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right">Score</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {tabularData
-                    .sort((a, b) => (b.ranking_score || 0) - (a.ranking_score || 0))
-                    .slice(0, 5)
-                    .map((candidate, index) => (
-                      <TableRow key={candidate.candidate_id}>
-                        <TableCell>{index + 1}</TableCell>
-                        <TableCell>{candidate.candidate_name}</TableCell>
-                        <TableCell align="right">{candidate.ranking_score || 0}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      {/* Email Details Dialog */}
-      <Dialog open={emailDialog} onClose={() => setEmailDialog(false)} maxWidth="lg" fullWidth>
-        <DialogTitle>Email Tracking Details</DialogTitle>
-        <DialogContent>
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Candidate</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Subject</TableCell>
-                  <TableCell>Sent At</TableCell>
-                  <TableCell>Opened</TableCell>
-                  <TableCell>Opened At</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {emailTracking.map((email) => (
-                  <TableRow key={email.tracking_id}>
-                    <TableCell>{email.candidate_name}</TableCell>
-                    <TableCell>{email.email}</TableCell>
-                    <TableCell>{email.subject}</TableCell>
-                    <TableCell>{new Date(email.sent_at).toLocaleString()}</TableCell>
-                    <TableCell>
-                      <Chip
-                        label={email.opened ? 'Yes' : 'No'}
-                        color={email.opened ? 'success' : 'default'}
-                        size="small"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      {email.opened_at ? new Date(email.opened_at).toLocaleString() : 'N/A'}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setEmailDialog(false)}>Close</Button>
-          <Button
-            onClick={() => exportToCSV(emailTracking, 'email_tracking_report.csv')}
-            startIcon={<DownloadIcon />}
-            variant="contained"
-          >
-            Export CSV
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+    <div className="panel chart-panel">
+      <h3>{title}</h3>
+      <div className="mini-bars tall">
+        {labels.map((label, index) => (
+          <div className="mini-bar-row" key={`${title}-${label}`}>
+            <span>{label || "Unlabeled"}</span>
+            <div className="bar-track"><div style={{ width: `${(values[index] / max) * 100}%` }} /></div>
+            <b>{values[index]}</b>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-export default Reports;
+export default function Reports() {
+  const [reports, setReports] = useState(null);
+  const [tracking, setTracking] = useState([]);
+  const [message, setMessage] = useState("");
+
+  async function refresh() {
+    const [reportPayload, trackingPayload] = await Promise.all([
+      apiGet("/api/reports-data"),
+      apiGet("/api/email-tracking"),
+    ]);
+    setReports(reportPayload);
+    setTracking(trackingPayload.tracking_data || []);
+  }
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
+  async function markResponded(trackingId) {
+    setMessage("Updating response tracking...");
+    try {
+      await apiPost(`/api/email-response/${trackingId}`, { response_notes: "Candidate replied with requested information." });
+      setMessage("Response recorded.");
+      await refresh();
+    } catch (err) {
+      setMessage(err.message);
+    }
+  }
+
+  return (
+    <div className="page-stack">
+      <header className="page-header">
+        <div>
+          <p className="eyebrow">Graphical dashboard and comparative views</p>
+          <h2>Reports</h2>
+        </div>
+      </header>
+
+      <section className="stats-grid">
+        <div className="stat-card"><span>Average Ranking</span><strong>{reports?.average_score ?? "..."}</strong></div>
+        <div className="stat-card amber"><span>Flagged Profiles</span><strong>{reports?.flagged_profiles ?? "..."}</strong></div>
+        <div className="stat-card green"><span>Complete Profiles</span><strong>{reports?.complete_profiles ?? "..."}</strong></div>
+      </section>
+
+      <section className="chart-grid">
+        <Bars title="Ranking Distribution" labels={reports?.score_distribution?.labels} values={reports?.score_distribution?.values} />
+        <Bars title="Research Mix" labels={reports?.research_mix?.labels} values={reports?.research_mix?.values} />
+        <Bars title="Top Skills" labels={reports?.top_skills?.labels} values={reports?.top_skills?.values} />
+        <Bars title="Top Topics" labels={reports?.top_topics?.labels} values={reports?.top_topics?.values} />
+      </section>
+
+      <section className="panel">
+        <h3>Comparative Ranking Table</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Score</th>
+              <th>Journals</th>
+              <th>Conferences</th>
+              <th>Skill Alignment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(reports?.ranked_candidates || []).map((row) => (
+              <tr key={row.candidate_id}>
+                <td>{row.candidate_name}</td>
+                <td><span className="score-pill">{row.ranking_score}</span></td>
+                <td>{row.journals}</td>
+                <td>{row.conferences}</td>
+                <td>{row.skill_alignment}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section className="panel">
+        <div className="panel-header">
+          <h3>Email Tracking and Candidate Responses</h3>
+          {message && <span className="muted">{message}</span>}
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Candidate</th>
+              <th>Email</th>
+              <th>Delivery</th>
+              <th>Opened</th>
+              <th>Responded</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tracking.map((row) => (
+              <tr key={row.tracking_id}>
+                <td>{row.candidate_name}</td>
+                <td>{row.to_email}</td>
+                <td>{row.delivery_status}</td>
+                <td>{row.opened ? "Yes" : "No"}</td>
+                <td>{row.responded ? "Yes" : "No"}</td>
+                <td>
+                  {!row.responded && <button className="ghost-button" onClick={() => markResponded(row.tracking_id)}>Mark response</button>}
+                </td>
+              </tr>
+            ))}
+            {tracking.length === 0 && (
+              <tr><td colSpan="6">No follow-up emails have been queued yet.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </section>
+    </div>
+  );
+}
